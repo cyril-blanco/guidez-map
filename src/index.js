@@ -8,7 +8,9 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
-const data = require('./data.clean.json');
+const settings = require('../data/settings');
+const data = require('./data.clean');
+const translations = require('../data/translations/en.json');
 
 var MapIcon = L.Icon.extend({
   options: {
@@ -21,20 +23,28 @@ var MapIcon = L.Icon.extend({
 var leafletMapItems = {};
 var overlayLayers = [];
 var filterLayers = {};
-function addMapItem(uniqueFilterBool, includeInFilterListBool, layerName, filterName, filterImageURL) {
-  var filterCheckboxFormat = "<img src='" + filterImageURL + "' width='24px'> <b>" + layerName + "</b>";
-  var leafletMapItem = {
+function addMapItem(includeInFilterListBool, layerName, filterName, iconUrl) {
+  const leafletFilterCheckbox = `<img src="${iconUrl}" width="24px"> <b>${layerName}</b>`;
+  leafletMapItems[layerName] = {
     leafletLayerFilterName: filterName,
     leafletLayerName: layerName,
-    leafletFilterCheckbox: filterCheckboxFormat,
+    leafletFilterCheckbox,
     leafletLayerGroup: L.layerGroup(),
-    leafletMapIcon: new MapIcon({iconUrl: filterImageURL}),
+    leafletMapIcon: new MapIcon({ iconUrl }),
   };
-  leafletMapItems[layerName] = leafletMapItem;
   if (includeInFilterListBool){
     filterLayers[leafletMapItems[layerName].leafletFilterCheckbox] = leafletMapItems[layerName].leafletLayerGroup;
   }
   overlayLayers.push(leafletMapItems[layerName].leafletLayerGroup);
+}
+
+const addMapItem2 = (item) => {
+  console.log(item);
+  addMapItem(item.includeInFilterListBool, item.layerName, item.filterName, item.iconUrl);
+};
+
+for (const item of settings.markerTypes) {
+  addMapItem2(item);
 }
 
 
@@ -47,13 +57,7 @@ var mapExtracts = "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/c
 
 // Define Map Filter Items/Layers/Icons
 //Format: addMapItem(excludeMiniImageInFilterBool, includeInFilterListBool, Name in the filter/table, Filter category, icon image URL)
-addMapItem(true, true, 'Ammo Box', 'AmmoBox', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/9/91/Interactive_map_ammo_box.png');
-addMapItem(true, true, 'Boss Spawn', 'BossSpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/6b/Interactive_map_boss_16x.png');
-addMapItem(true, true, 'Cash Register', 'CashRegister', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/3/31/Interactive_map_register.png');
-addMapItem(true, true, 'Computer', 'Computer', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/2/23/Interactive_map_computer.png');
-addMapItem(true, true, 'Drawer', 'Drawer', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/bb/Interactive_map_file_cabinet.png');
-addMapItem(false, true, 'Extracts', 'None', 'https://escapefromtarkov.gamepedia.com/media/9/9a/Interactive_map_pmc_extract_8x.png');
-addMapItem(true, true, 'Grenade Box', 'GrenadeBox', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/8/8a/Interactive_map_grenade_box.png');
+/*
 addMapItem(true, true, 'Jacket', 'Jacket', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/3/37/Interactive_map_jacket.png');
 addMapItem(true, true, 'Key Spawn','KeySpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/d/d9/Interactive_map_key_64x.png');
 addMapItem(true, true, 'Keycard Spawn','KeycardSpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/1e/Interactive_map_keycard.png');
@@ -72,12 +76,12 @@ addMapItem(true, true, 'Stash', 'Stash', 'https://gamepedia.cursecdn.com/escapef
 addMapItem(true, true, 'Toolbox', 'Toolbox', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/b1/CASE.png');
 addMapItem(true, true, 'Unknown', 'Unknown', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/4/4d/Interactive_map_unknown_category_128x.png');
 addMapItem(true, true, 'Weapon Box', 'WeaponBox', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/1a/Interactive_map_weapon_box.png');
-
+*/
 
 function turnLayerOn(){
   console.log(Object.keys(map._controlCorners));
   console.log(Object.keys(map._controlContainer));
-  console.log(Object.keys(map._mapPane._leaflet_pos.x))
+  console.log(Object.keys(map._mapPane._leaflet_pos.x));
   for (var i = 0; i < overlayLayers.length; ++i) {
     map.addLayer(overlayLayers[i]);
   }
@@ -88,7 +92,7 @@ function turnLayerOff(){
   }
 }
 
-var dynamicPopUps = [];
+var dynamicPopUps = data;
 
 // Load the data for the map.
 // $.ajax({
@@ -146,8 +150,6 @@ var dynamicPopUps = [];
 //     return console.log("error");
 //   }
 // });
-
-dynamicPopUps = data;
 
 
 // Define the map and options for it.

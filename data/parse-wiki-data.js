@@ -44,5 +44,5 @@ for (var i in mapData) {
 
 console.log(dynamicPopUps);
 
-fs.writeFileSync('data.clean.json', JSON.stringify(dynamicPopUps));
+fs.writeFileSync('data.clean.json', JSON.stringify(dynamicPopUps, null, 2));
 

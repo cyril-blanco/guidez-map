@@ -18,7 +18,8 @@
   },
   "homepage": "https://github.com/cyril-blanco/guidez-map#readme",
   "dependencies": {
-    "leaflet": "^1.6.0"
+    "leaflet": "^1.6.0",
+    "leaflet-fullscreen": "^1.0.2"
   },
   "devDependencies": {
     "cheerio": "^1.0.0-rc.3",

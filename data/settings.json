@@ -1,0 +1,46 @@
+{
+  "markerTypes": [
+    {
+      "includeInFilterListBool": true,
+      "layerName": "ammobox",
+      "filterName": "AmmoBox",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/9/91/Interactive_map_ammo_box.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Boss Spawn",
+      "filterName": "BossSpawn",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/6b/Interactive_map_boss_16x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Cash Register",
+      "filterName": "CashRegister",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/3/31/Interactive_map_register.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Computer",
+      "filterName": "Computer",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/2/23/Interactive_map_computer.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Drawer",
+      "filterName": "Drawer",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/bb/Interactive_map_file_cabinet.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Extracts",
+      "filterName": "None",
+      "iconUrl": "https://escapefromtarkov.gamepedia.com/media/9/9a/Interactive_map_pmc_extract_8x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Grenade Box",
+      "filterName": "Grenade Box",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/8/8a/Interactive_map_grenade_box.png"
+    }
+  ]
+}
