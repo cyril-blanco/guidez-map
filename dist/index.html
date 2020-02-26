@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <title>Guidez map</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+      .leaflet-container {
+        background-color:rgba(255,0,0,0.0);
+      }
+      .map-scroll:before {
+        content: 'Use SHIFT + mouse wheel to zoom the map \a Use CTRL + click to get coordinates';
+        font-family: "Arial Black", Gadget, sans-serif;
+        white-space: pre;
+        position: absolute;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: black;
+        top: 0%;
+        left: 5%;
+        z-index: 999;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" style="width: 100%; height: 100%;"></div>
+    <script src="bundle.js"></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.css">
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+  </body>
+</html>
