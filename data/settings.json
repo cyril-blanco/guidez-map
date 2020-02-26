@@ -1,4 +1,14 @@
 {
+  "maps": {
+    "customs": {
+      "background": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/9/9a/Customs_map_glory4lyfe.png",
+      "bounds": [[-2142, -4096],[2142, 4096]],
+      "overlays": {
+        "scavPatrol": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/d/d7/Interactive_Map_customs_scav_patrols.png",
+        "extracts": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/cb/Interactive_Map_Customs_Extracts.png"
+      }
+    }
+  },
   "markerTypes": [
     {
       "includeInFilterListBool": true,
@@ -41,6 +51,114 @@
       "layerName": "Grenade Box",
       "filterName": "Grenade Box",
       "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/8/8a/Interactive_map_grenade_box.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Jacket",
+      "filterName": "Jacket",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/3/37/Interactive_map_jacket.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Key Spawn",
+      "filterName": "KeySpawn",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/d/d9/Interactive_map_key_64x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Keycard Spawn",
+      "filterName": "KeycardSpawn",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/1e/Interactive_map_keycard.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Locked Door",
+      "filterName": "LockedObject",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/f/f3/Interactive_map_lock_symbol_8x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Loose Loot",
+      "filterName": "LooseLoot",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/8/85/Interactive_map_loose_loot_8x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Medical",
+      "filterName": "Medical",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/10/Interactive_map_medical_supplies_8x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "PMC Spawn",
+      "filterName": "PMCSpawn",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/18/Interactive_map_PMC_Spawn.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Quest Related",
+      "filterName": "QuestRelated",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/bc/Interactive_map-questitem_type_1.png"
+    },
+    {
+      "includeInFilterListBool": false,
+      "layerName": "Safari",
+      "filterName": "QuestRelated",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/60/Interactive_Map_safari.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Safe",
+      "filterName": "Safe",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/65/Interactive_map_safe.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Scav Spawn",
+      "filterName": "ScavSpawn",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/8/8c/Interactive_map_ushanka.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Scav Patrols",
+      "filterName": "None",
+      "iconUrl": "https://escapefromtarkov.gamepedia.com/media/3/31/Interactable_Map_Scav_Patrols.png"
+    },
+    {
+      "includeInFilterListBool": false,
+      "layerName": "Scav Sniper",
+      "filterName": "ScavSpawn",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/2/20/Interactive_map_sniper.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Sports Bag",
+      "filterName": "SportsBag",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/b4/Interactive_map_sportbag_toolbox.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Stash",
+      "filterName": "Stash",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/3/39/Interactive_map_stash_8x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Toolbox",
+      "filterName": "Toolbox",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/b1/CASE.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Unknown",
+      "filterName": "Unknown",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/4/4d/Interactive_map_unknown_category_128x.png"
+    },
+    {
+      "includeInFilterListBool": true,
+      "layerName": "Weapon Box",
+      "filterName": "WeaponBox",
+      "iconUrl": "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/1a/Interactive_map_weapon_box.png"
     }
   ]
 }

@@ -8,11 +8,13 @@ L.Icon.Default.mergeOptions({
   shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
 });
 
+const mapName = 'customs';
 const settings = require('../data/settings');
 const data = require('./data.clean');
 const translations = require('../data/translations/en.json');
 
-var MapIcon = L.Icon.extend({
+/* Custom map icon definition */
+const MapIcon = L.Icon.extend({
   options: {
     iconSize: [26, 26],
     iconAnchor: [13, 13],
@@ -20,63 +22,30 @@ var MapIcon = L.Icon.extend({
     tooltipAnchor: [0, 0]
   }
 });
-var leafletMapItems = {};
-var overlayLayers = [];
-var filterLayers = {};
-function addMapItem(includeInFilterListBool, layerName, filterName, iconUrl) {
-  const leafletFilterCheckbox = `<img src="${iconUrl}" width="24px"> <b>${layerName}</b>`;
-  leafletMapItems[layerName] = {
-    leafletLayerFilterName: filterName,
-    leafletLayerName: layerName,
+
+const leafletMapItems = {};
+const overlayLayers = [];
+const filterLayers = {};
+
+const addMapItem = (item) => {
+  const { includeInFilterListBool, filterName: leafletLayerFilterName, layerName: leafletLayerName, iconUrl } = item;
+  const leafletFilterCheckbox = `<img src="${iconUrl}" alt="${leafletLayerName}" width="24px"> <b>${leafletLayerName}</b>`;
+  leafletMapItems[leafletLayerName] = {
+    leafletLayerFilterName,
+    leafletLayerName,
     leafletFilterCheckbox,
     leafletLayerGroup: L.layerGroup(),
     leafletMapIcon: new MapIcon({ iconUrl }),
   };
   if (includeInFilterListBool){
-    filterLayers[leafletMapItems[layerName].leafletFilterCheckbox] = leafletMapItems[layerName].leafletLayerGroup;
+    filterLayers[leafletMapItems[leafletLayerName].leafletFilterCheckbox] = leafletMapItems[leafletLayerName].leafletLayerGroup;
   }
-  overlayLayers.push(leafletMapItems[layerName].leafletLayerGroup);
-}
-
-const addMapItem2 = (item) => {
-  console.log(item);
-  addMapItem(item.includeInFilterListBool, item.layerName, item.filterName, item.iconUrl);
+  overlayLayers.push(leafletMapItems[leafletLayerName].leafletLayerGroup);
 };
 
 for (const item of settings.markerTypes) {
-  addMapItem2(item);
+  addMapItem(item);
 }
-
-
-// Base URL and background
-var topLevelDomain = "https://escapefromtarkov.gamepedia.com";
-var interactiveMapTableData = "Customs_Interactive_Map_Table";
-var mapBackground = "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/9/9a/Customs_map_glory4lyfe.png";
-var scavPatrols = "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/d/d7/Interactive_Map_customs_scav_patrols.png";
-var mapExtracts = "https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/c/cb/Interactive_Map_Customs_Extracts.png";
-
-// Define Map Filter Items/Layers/Icons
-//Format: addMapItem(excludeMiniImageInFilterBool, includeInFilterListBool, Name in the filter/table, Filter category, icon image URL)
-/*
-addMapItem(true, true, 'Jacket', 'Jacket', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/3/37/Interactive_map_jacket.png');
-addMapItem(true, true, 'Key Spawn','KeySpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/d/d9/Interactive_map_key_64x.png');
-addMapItem(true, true, 'Keycard Spawn','KeycardSpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/1e/Interactive_map_keycard.png');
-addMapItem(true, true, 'Locked Door', 'LockedObject', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/f/f3/Interactive_map_lock_symbol_8x.png');
-addMapItem(true, true, 'Loose Loot','LooseLoot', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/8/85/Interactive_map_loose_loot_8x.png');
-addMapItem(true, true, 'Medical', 'Medical','https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/10/Interactive_map_medical_supplies_8x.png');
-addMapItem(true, true, 'PMC Spawn', 'PMCSpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/18/Interactive_map_PMC_Spawn.png');
-addMapItem(true, true, 'Quest Related', 'QuestRelated', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/bc/Interactive_map-questitem_type_1.png');
-addMapItem(false, false, 'Safari', 'QuestRelated', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/60/Interactive_Map_safari.png');
-addMapItem(true, true, 'Safe', 'Safe', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/6/65/Interactive_map_safe.png');
-addMapItem(true, true, 'Scav Spawn', 'ScavSpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/8/8c/Interactive_map_ushanka.png');
-addMapItem(false, true, 'Scav Patrols', 'None', 'https://escapefromtarkov.gamepedia.com/media/3/31/Interactable_Map_Scav_Patrols.png');
-addMapItem(false, false, 'Scav Sniper', 'ScavSpawn', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/2/20/Interactive_map_sniper.png');
-addMapItem(true, true, 'Sports Bag', 'SportsBag', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/b4/Interactive_map_sportbag_toolbox.png');
-addMapItem(true, true, 'Stash', 'Stash', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/3/39/Interactive_map_stash_8x.png');
-addMapItem(true, true, 'Toolbox', 'Toolbox', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/b/b1/CASE.png');
-addMapItem(true, true, 'Unknown', 'Unknown', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/4/4d/Interactive_map_unknown_category_128x.png');
-addMapItem(true, true, 'Weapon Box', 'WeaponBox', 'https://gamepedia.cursecdn.com/escapefromtarkov_gamepedia/1/1a/Interactive_map_weapon_box.png');
-*/
 
 function turnLayerOn(){
   console.log(Object.keys(map._controlCorners));
@@ -92,68 +61,10 @@ function turnLayerOff(){
   }
 }
 
-var dynamicPopUps = data;
-
-// Load the data for the map.
-// $.ajax({
-//   type: 'GET',
-//   url: topLevelDomain + '/api.php?action=parse&format=json&prop=text|​links&page=' + interactiveMapTableData,
-//   contentType: 'application/json; charset=utf-8',
-//   async: false,
-//   dataType: 'json',
-//   success: function(data) {
-//     var html = data.parse.text['*'];
-//     if (!html) {
-//       return console.log('no HTML');
-//     }
-//     var $hiddenContent = $('<div/>').html(data.parse.text['*']).hide();
-//     var mapData = $hiddenContent.find('table.sortable tr').map(function() {
-//       return new Array($('td', this).map(function() {
-//         return $(this).text().replace(/\n/g, '').trim()
-//       }).slice(0, 9).get())
-//     }).get();
-//     $hiddenContent.remove();
-//
-//     for (var i in mapData) {
-//       if (i == 0) {
-//         continue;
-//       }
-//       var locationY = parseFloat(mapData[i][3]) || 0;
-//       var locationX = parseFloat(mapData[i][4]) || 0;
-//       var coordinatesXY = 'X: ' + locationX + ' Y: ' + locationY;
-//       var popupContent = "<strong>" + mapData[i][1] + "</strong><BR>";
-//       if (mapData[i][1] != "") {
-//         popupContent = "<a href=\"https://escapefromtarkov.gamepedia.com/" + mapData[i][1] + "\" target=\"_blank\">" + popupContent + "</a>";
-//       }
-//       else{
-//         popupContent = '<b>' + mapData[i][0] + '</b><br>';
-//       }
-//       if (mapData[i][2] != "") {
-//         popupContent += mapData[i][2] + "<br>";
-//       }
-//       if (mapData[i][5] != "") {
-//         popupContent += '<br><a href="' + mapData[i][5] + '" target="_blank"><img src="' + mapData[i][5] + '" width="150px"></a><br><font color="white">[' + coordinatesXY + ']</font>';
-//       }
-//       else {
-//         popupContent += '<font color="white">[' + coordinatesXY + ']</font>';
-//       }
-//       currentPopUp = {
-//         filterName: mapData[i][0],
-//         popupX: locationX,
-//         popupY: locationY,
-//         popupContent: popupContent
-//       };
-//       dynamicPopUps.push(currentPopUp);
-//     }
-//   }, // End of success function AJAX
-//   error: function() {
-//     return console.log("error");
-//   }
-// });
-
+const dynamicPopUps = data;
 
 // Define the map and options for it.
-var map = L.map('map', {
+const map = L.map('map', {
   crs: L.CRS.Simple,
   minZoom: -3,
   maxZoom: 1,
@@ -164,14 +75,13 @@ var map = L.map('map', {
 });
 
 // Define the boundaries
-var bounds = [[-2142, -4096],[2142, 4096]];
+const bounds = settings.maps[mapName].bounds;
 
 // Provide the full URL to the map image that has been uploaded.
-var image = L.imageOverlay(mapBackground, bounds).addTo(map);
+L.imageOverlay(settings.maps[mapName].background, bounds).addTo(map);
 map.fitBounds(bounds);
 
-var baseMaps = {};
-var controlLayers = L.control.layers(baseMaps, filterLayers, {
+L.control.layers({}, filterLayers, {
   "sortLayers": false,
   "collapsed": false,
   position: 'topleft'
@@ -184,25 +94,30 @@ for (var i = 0; i < dynamicPopUps.length; ++i){
     var leafletPopup = L.marker(
         [dynamicPopUps[i].popupX, dynamicPopUps[i].popupY],
         {icon: leafletMapItems[dynamicPopUps[i].filterName].leafletMapIcon}
-    )
+    );
 
     leafletPopup.addTo(leafletMapItems[dynamicPopUps[i].filterName].leafletLayerGroup).bindPopup(dynamicPopUps[i].popupContent);
   }
 }
 
-//disable default scroll to use CTRL
+// Disable default scroll to use CTRL
 map.scrollWheelZoom.disable();
 map.on('click', function(e) {
   if (e.originalEvent.ctrlKey) {
-    var locationX = e.latlng.lng;
-    var locationY = e.latlng.lat;
-    this.openTooltip("X: " + locationX.toFixed(0) + "<BR>Y: " + locationY.toFixed(0), e.latlng);
+    // Opens a popup with coordinates when user CTRL-clicks on map
+    // It seems to be a tool for editors, maybe we could disable it in "production" mode. And maybe we don't care...
+    this.openTooltip(`X: ${e.latlng.lng.toFixed(0)}<br>Y: ${e.latlng.lng.toFixed(0)}`, e.latlng);
   }
 });
 
+/*
+ * NOT WORKING YET
+ * Could be great if we could translate this to vanilla JS to get rid of jQuery dependency. It would speed up loading
+ * time and make it easier to integrate.
+ */
 $("#map").bind('mousewheel DOMMouseScroll', function(event) {
   event.stopPropagation();
-  if (event.shiftKey == true) {
+  if (event.shiftKey === true) {
     event.preventDefault();
     map.scrollWheelZoom.enable();
     $('#map').removeClass('map-scroll');
